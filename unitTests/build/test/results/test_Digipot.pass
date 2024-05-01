@@ -1,0 +1,22 @@
+---
+:source:
+  :path: test
+  :file: test_Digipot.c
+:successes:
+- :test: test_CalculateTapPosition_desired_greater_than_max
+  :line: 26
+  :message: ''
+  :unity_test_time: 0
+- :test: test_CalculateTapPosition_main_branch
+  :line: 43
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 2
+  :passed: 2
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0012155420045019127

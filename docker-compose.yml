@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  ceedling:
+    image: ruby:2.7
+    volumes:
+      - /your/directory:/usr/src/app
+    working_dir: /usr/src/app
+    command: /bin/bash
+    tty: True
+    stdin_open: True

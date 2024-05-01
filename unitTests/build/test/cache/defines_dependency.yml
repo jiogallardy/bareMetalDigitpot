@@ -1,0 +1,5 @@
+---
+"../Digitpot.c":
+- TEST
+build/test/mocks/mock_Pin.c:
+- TEST
