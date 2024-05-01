@@ -1,4 +1,4 @@
-# Documentation beginning for the challenge project for Jovany (Jio) Gallardy
+# Documentation for bare metal Digital Potentiometer control 
 
 ## This project relies on an Arm Cortex M4 STM32F407 as the mcu selected
 
@@ -12,6 +12,6 @@ The state of the taps is not stored between power up and down sessions so it sta
 
 ### Testing, Ceedling
 A basic testing environment has been setup. 
-To run a simple unit test, simply run `docker compose run ceedling`, then `ceedling test:all`
+To run a simple unit test, simply run `docker compose run ceedling`, then within the shell run `ceedling test:all`
 
 Code has been clang formatted
