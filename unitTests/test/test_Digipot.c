@@ -1,11 +1,11 @@
 /**
- * @file test_hal.c
+ * @file test_Digitpot.c
  * @author Jio Gallardy  (jiogallardy@gmail.com)
  * @brief 
  * @version 0.1
  * @date 2024-04-30
  * 
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024 All rights reserved
  * 
  */
 

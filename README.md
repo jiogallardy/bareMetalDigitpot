@@ -13,7 +13,6 @@ The state of the taps is not stored between power up and down sessions so it sta
 ## Visual Aid
 ![visual aid](visualAid.png)
 
-
 ### Testing, Ceedling
 A basic testing environment has been setup. 
 To run a simple unit test, simply run `docker compose run ceedling`, then within the shell run `ceedling test:all`

@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2024-05-01
  * 
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024 All rights reserved
  * 
  */
 
@@ -15,7 +15,7 @@
 #include "Generic.h"
 
 #define FREQ 132000000 // the given CPU frequency, 132 MHz
-#define SystemCoreClock FREQ
+#define SYS_CORE_CLK FREQ
 
 #define BIT(x) (1UL << (x))
 #define PIN(bank, num) ((((bank) - 'A') << 8) | (num))
@@ -24,12 +24,12 @@
 
 /**
  * @brief Delay by amount count
- * 
+ *
  * @param count 
  */
 static inline void Spin(volatile u32 count) {
   while (count--)
-    (void) 0;
+    ;
 }
 
 struct systick {
@@ -51,7 +51,7 @@ struct rcc {
 /**
  * @brief ctrl disables/enables systick, load loads the inital counter value, val the current counter value, is clocked via RCC->APB2ENR
  * 
- * @param ticks 
+ * @param ticks Ticks per clock cycle
  */
 static inline void SystickInit(u32 ticks) {
   if ((ticks - 1) > 0xffffff)
@@ -75,8 +75,8 @@ enum {GPIO_MODE_INPUT, GPIO_MODE_OUTPUT, GPIO_MODE_AF, GPIO_MODE_ANALOG};
 /**
  * @brief Sets the gpio mode to a value 
  * 
- * @param pin 
- * @param mode 
+ * @param pin The pin of the desired GPIO
+ * @param mode The mode based on the enum
  */
 static inline void GpioSetMode(u16 pin, u8 mode) {
   struct gpio *gpio = GPIO(PINBANK(pin)); // GPIO bank
@@ -89,8 +89,8 @@ static inline void GpioSetMode(u16 pin, u8 mode) {
 /**
  * @brief Writes a high or low to a given gpio pin
  * 
- * @param pin 
- * @param val 
+ * @param pin The pin to write to
+ * @param val The desired value, either high or low
  */
 static inline void GpioWrite(u16 pin, bool val) {
   struct gpio *gpio = GPIO(PINBANK(pin));

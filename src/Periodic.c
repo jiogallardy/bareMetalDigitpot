@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2024-04-27
  *
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024 All rights reserved
  *
  */
 
@@ -23,7 +23,7 @@ void PeriodicModuleInit(void) {
   // Set a default frequency
   u32 defaultFrequency = 1000;
   // Calculate ticks
-  u32 ticks = SystemCoreClock / defaultFrequency - 1;
+  u32 ticks = SYS_CORE_CLK / defaultFrequency - 1;
   // Call hardware setup
   SystickInit(ticks); 
 }
@@ -32,10 +32,10 @@ void PeriodicModuleInit(void) {
  * @brief Utility function for initializing the clock to the desired tick
  * 
  * @param FreqHz 
- * @param Handler 
+ * @param Handler what is this? 
  */
 void PeriodicConfig(f32 FreqHz, PeriodicHandlerT Handler) {
-  u32 ticks = SystemCoreClock / FreqHz - 1;
+  u32 ticks = SYS_CORE_CLK / FreqHz - 1;
   if (ticks > 0xFFFFFF) {
     ticks = 0xFFFFFF; // Maximum value for SysTick LOAD register
   }
@@ -95,6 +95,9 @@ void PeriodicIruptFlagClear(void) {
  * @param time_limit 
  */
 void ExecuteAndMeasure(void (*operation)(void), u32 time_limit) {
+  if (!operation) {
+    return;
+  }
   MeasureResult result; 
   u32 start_time = s_ticks;
   result.status = operation(); // Call the function in this case the set resistance function
@@ -109,5 +112,5 @@ void ExecuteAndMeasure(void (*operation)(void), u32 time_limit) {
     printf("Operation completed within the time limit: %lu ms\n", elapsed_time);
     result.on_time = True; 
   }
-  return result; 
+  return result; // How can you return a result for a void function?
 }

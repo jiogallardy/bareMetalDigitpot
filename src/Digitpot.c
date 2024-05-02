@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2024-04-30
  *
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024 All rights reserved
  *
  */
 
@@ -25,13 +25,14 @@ static u16 current_wiper_B = 128;
  * @param count
  */
 static inline void Spin(volatile u32 count) {
-  while (count--)
-    (void)0;
+  while (count--) {
+    ;
+  }
 }
 /**
  * @brief Activate a Chip Select
  *
- * @param cs_pin
+ * @param cs_pin The pin to select for chip select, in this case either CSA or CSB, by activating you are telling the chip signals are going to be sent
  */
 static void SelectChannel(PinT cs_pin) {
   PinWrite(cs_pin, False); // Active low
@@ -40,7 +41,7 @@ static void SelectChannel(PinT cs_pin) {
 /**
  * @brief Deselect a channel
  *
- * @param cs_pin
+ * @param cs_pin The pin to deselect for chip select, in this case either CSA or CSB, needs to be called after SelectChannel
  */
 static void DeselectChannel(PinT cs_pin) {
   PinWrite(cs_pin, True); // Inactive high
@@ -49,15 +50,15 @@ static void DeselectChannel(PinT cs_pin) {
 /**
  * @brief Set the direction object
  *
- * @param ud_pin
- * @param increment
+ * @param ud_pin Register up down control input pin
+ * @param increment Set to true to increment, false to decrement
  */
 static void SetDirection(PinT ud_pin, bool increment) {
   PinWrite(ud_pin, increment);
 }
 
 /**
- * @brief Increment or decrement the pin
+ * @brief Increment or decrement the pin, once SelectChannel() and SetDirection() have been called
  *
  * @param inc_pin
  */
@@ -70,11 +71,11 @@ static void PulseIncrement(PinT inc_pin) {
 
 /**
  * @brief Helper method to find the tap position based on given
- * resistance (should be static)
+ * resistance (should be static, not for unit test example)
  *
- * @param desired_resistance
- * @param max_resistance
- * @return u8
+ * @param desired_resistance Used to calculate tap position
+ * @param max_resistance Used as reference to calculate tap position
+ * @return Returns needed tap position for potentieometer to be set to desired resistance
  */
 u8 CalculateTapPosition(u32 desired_resistance, u32 max_resistance) {
 
@@ -87,8 +88,8 @@ u8 CalculateTapPosition(u32 desired_resistance, u32 max_resistance) {
 /**
  * @brief Set the resistance for the given channel
  *
- * @param channel
- * @param desired_resistance
+ * @param channel The channel of the Digitpot either 'A' or 'B', to have the resistance set
+ * @param desired_resistance The desired resistance to be set of the channel selected
  */
 s8 SetResistance(char channel, u32 desired_resistance) {
 

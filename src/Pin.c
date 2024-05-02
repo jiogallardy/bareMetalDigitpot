@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2024-04-27
  *
- * @copyright Copyright (c) 2024
+ * @copyright Copyright (c) 2024 All rights reserved All rights reserved
  *
  */
 
@@ -29,7 +29,7 @@ void PinModuleInit(void) {
 /**
  * @brief Write to the pin
  *
- * @param pin
- * @param value
+ * @param pin The pin on a GPIO to write to, currently only GPIOA
+ * @param value The value to write to the pin
  */
 void PinWrite(PinT pin, bool value) { GpioWrite(PIN(PIN_BANK, pin), value); }
