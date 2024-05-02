@@ -8,10 +8,15 @@ Please find the datasheet for the mcu here [Datasheet](https://www.st.com/resour
 We are assuming that we are using the 10K Ohm model from the provided datasheet
 
 ## Additional Notes about power up and power down
-The state of the taps is not stored between power up and down sessions so it starts out at the 128 tap point, additional code would be needed to handle this feature. 
+The state of the taps is not stored between power up and down sessions so it starts out at the 128 tap point, additional code would be needed to handle this feature. The main loop runs once and then the mcu will then loop forever
+
+## Visual Aid
+![visual aid](visualAid.png)
+
 
 ### Testing, Ceedling
 A basic testing environment has been setup. 
 To run a simple unit test, simply run `docker compose run ceedling`, then within the shell run `ceedling test:all`
 
+### Formatting
 Code has been clang formatted
