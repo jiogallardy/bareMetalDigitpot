@@ -1,9 +1,14 @@
+INC_DIR = include
+SRC_DIR = src
+
 CFLAGS  ?=  -W -Wall -Wextra -Werror -Wundef -Wshadow -Wdouble-promotion \
             -Wformat-truncation -fno-common -Wconversion \
-            -g3 -Os -ffunction-sections -fdata-sections -I. \
+            -g3 -Os -ffunction-sections -fdata-sections -I$(INC_DIR) \
             -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 $(EXTRA_CFLAGS)
-LDFLAGS ?= -Tstm32.ld -nostartfiles -nostdlib --specs nano.specs -lc -lgcc -Wl,--gc-sections -Wl,-Map=$@.map
-SOURCES = main.c 
+LDFLAGS ?= -Tstm32.ld -nostartfiles -nostdlib --specs=nano.specs -lc -lgcc -Wl,--gc-sections
+
+SOURCES = $(wildcard $(SRC_DIR)/*.c)
+OBJECTS = $(SOURCES:.c=.o)
 
 ifeq ($(OS),Windows_NT)
   RM = cmd /C del /Q /F
@@ -13,8 +18,11 @@ endif
 
 build: firmware.bin
 
-firmware.elf: $(SOURCES)
-	arm-none-eabi-gcc $(SOURCES) $(CFLAGS) $(LDFLAGS) -o $@
+firmware.elf: $(OBJECTS)
+	arm-none-eabi-gcc $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
+
+%.o: %.c
+	arm-none-eabi-gcc $(CFLAGS) -c $< -o $@
 
 firmware.bin: firmware.elf
 	arm-none-eabi-objcopy -O binary $< $@
@@ -23,4 +31,4 @@ flash: firmware.bin
 	st-flash --reset write $< 0x8000000
 
 clean:
-	$(RM) firmware.*
+	$(RM) $(OBJECTS) firmware.*
