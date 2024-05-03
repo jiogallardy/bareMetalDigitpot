@@ -32,7 +32,6 @@ void PeriodicModuleInit(void) {
  * @brief Utility function for initializing the clock to the desired tick
  * 
  * @param FreqHz 
- * @param Handler what is this? 
  */
 void PeriodicConfig(f32 FreqHz, PeriodicHandlerT Handler) {
   u32 ticks = SYS_CORE_CLK / FreqHz - 1;
